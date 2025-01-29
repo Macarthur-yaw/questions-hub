@@ -1,6 +1,8 @@
 package com.example.pastQuestions.services;
 
+import com.example.pastQuestions.dto.AnswerResponse;
 import com.example.pastQuestions.dto.QuestionsDto;
+import com.example.pastQuestions.dto.UserInputAnswerDto;
 import com.example.pastQuestions.enums.Program;
 import com.example.pastQuestions.enums.UserYear;
 import org.springframework.data.domain.Page;
@@ -14,8 +16,9 @@ import java.util.UUID;
 
 public interface QuestionsService {
 
-    public Page<QuestionsDto> getAllAvailableCourses(@RequestParam Program program, @RequestParam UserYear userYear, Pageable pageable);
+    public Page<QuestionsDto> getAllAvailableCourses(Program program, UserYear userYear, Pageable pageable);
 
-    public Page<QuestionsDto> getQuestionsOfCourses(@PathVariable UUID id);
+    public Page<QuestionsDto> getQuestionsOfCourses(UUID id);
 
+    public boolean sendAnswers(UUID id, UserInputAnswerDto userInputAnswerDto);
 }

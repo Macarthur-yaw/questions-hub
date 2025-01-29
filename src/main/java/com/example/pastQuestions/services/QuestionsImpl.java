@@ -1,6 +1,8 @@
 package com.example.pastQuestions.services;
+import com.example.pastQuestions.dto.AnswerResponse;
 import com.example.pastQuestions.dto.CoursesDto;
 import com.example.pastQuestions.dto.QuestionsDto;
+import com.example.pastQuestions.dto.UserInputAnswerDto;
 import com.example.pastQuestions.entity.Courses;
 import com.example.pastQuestions.entity.Questions;
 import com.example.pastQuestions.enums.Program;
@@ -38,6 +40,17 @@ CoursesRepository coursesRepository;
 
         Page<QuestionsDto> questionsResponse=questionRepository.findQuestionsOfCoursesById(id);
         return questionsResponse;
+
+    }
+
+    @Override
+    public boolean sendAnswers(UUID id, UserInputAnswerDto userInputAnswerDto) {
+        Optional<Questions> questions=questionRepository.findById(id);
+        if(questions.isEmpty()){
+            throw new QuestionsNotfoundException("questions with that id can not be found");
+        }
+        Questions questions1=questions.get();
+        return (questions1.getAnswers().getAnswer()).equals(userInputAnswerDto.answer());
 
     }
 }
