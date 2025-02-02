@@ -15,13 +15,13 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
-    private static final String SECRET_KEY="welcome";
+    private static final String SECRET_KEY="pTuFvoEkDItpHER2X7Z0wDdLYuNVlv5HVVIAAgsWubgFxXwgSINCeA2O2q4V8alN";
     public String extractUsername(String token){
         return null;
     }
 
     private String buildToken(User user,Long expiration){
-        return Jwts.builder().subject(user.getEmailAddress()).issuedAt(new Date(System.currentTimeMillis())).expiration(new Date(System.currentTimeMillis()+expiration)).signWith(getsigninKey()).compact();
+        return Jwts.builder().subject(user.getEmailAddress()).issuedAt(new Date(System.currentTimeMillis())).expiration(new Date(System.currentTimeMillis()+1000*60*24)).signWith(getsigninKey()).compact();
 
     }
     private String generateToken(User user){
@@ -44,7 +44,7 @@ return Keys.hmacShaKeyFor(keyBytes);
         return extractClaim(token,Claims::getSubject);
 
     }
-    private boolean isValid(String token,User user){
+    public boolean isValid(String token,User user){
         String emailAddress=extractEmailAddress(token);
         return emailAddress.equals(user.getEmailAddress()) && !isTokenExpired(token);
     }
