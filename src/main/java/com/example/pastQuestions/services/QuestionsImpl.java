@@ -24,22 +24,21 @@ import java.util.function.Function;
 @Service
 public class QuestionsImpl implements QuestionsService {
      QuestionRepository questionRepository;
-CoursesRepository coursesRepository;
+     CoursesRepository coursesRepository;
     @Override
 
 
     public Page<QuestionsDto> getAllAvailableCourses(Program program, UserYear userYear,Pageable pageable) {
 
-        Page<QuestionsDto> coursesAvailable=coursesRepository.findAllQuestionsWithProgram(program.name(), userYear.name(), pageable);
-        return coursesAvailable;
+        return coursesRepository.findAllQuestionsWithProgram(program.name(), userYear.name(), pageable);
+
 
     }
 
     @Override
     public Page<QuestionsDto> getQuestionsOfCourses(UUID id) {
 
-        Page<QuestionsDto> questionsResponse=questionRepository.findQuestionsOfCoursesById(id);
-        return questionsResponse;
+        return questionRepository.findQuestionsOfCoursesById(id);
 
     }
 

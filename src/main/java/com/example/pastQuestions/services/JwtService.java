@@ -24,7 +24,7 @@ public class JwtService {
         return Jwts.builder().subject(user.getEmailAddress()).issuedAt(new Date(System.currentTimeMillis())).expiration(new Date(System.currentTimeMillis()+1000*60*24)).signWith(getsigninKey()).compact();
 
     }
-    private String generateToken(User user){
+    public String generateToken(User user){
         return buildToken(user, 234011223L);
     }
     private SecretKey getsigninKey(){

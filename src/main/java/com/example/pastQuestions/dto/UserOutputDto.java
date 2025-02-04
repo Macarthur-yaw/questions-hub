@@ -8,6 +8,8 @@ public record UserOutputDto(
         String lastName,
         String emailAddress,
         String role,
-        UUID id
+        UUID id,
+        String accessToken,
+        String refreshToken
 ) {
 }
